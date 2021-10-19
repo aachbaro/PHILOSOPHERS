@@ -1,6 +1,7 @@
 NAME = philo
 SRC = SRCS/main.c \
       SRCS/utils.c \
+	  SRCS/init.c \
 
 LIBFT = -L./LIBFT -lft
 PTHREAD = -pthread
