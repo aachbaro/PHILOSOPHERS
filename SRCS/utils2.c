@@ -1,26 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/21 12:03:52 by aachbaro          #+#    #+#             */
-/*   Updated: 2021/10/21 13:40:15 by aachbaro         ###   ########.fr       */
+/*   Created: 2021/10/21 12:19:56 by aachbaro          #+#    #+#             */
+/*   Updated: 2021/10/21 12:30:20 by aachbaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
 
-int	main(int ac, char **av)
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	t_data	data;
+	size_t	i;
 
-	if (param_handler(&data.param, ac, av) == -1)
+	i = 0;
+	while (i < n && (s1[i] || s2[i]))
 	{
-		printf("Error\n");
-		return (-1);
+		if (s1[i] != s2[i])
+			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+		i++;
 	}
-	printf("philosophes = %d\ndie = %d\neat = %d\nsleep = %d\nend = %d\n",
-			data.param.nb_philo, data.param.die_t, data.param.eat_t, data.param.sleep_t, data.param.simul_end);
+	return (0);
+}
+
+size_t	ft_strlen(const char *str)
+{
+	size_t	i;
+
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
 }
