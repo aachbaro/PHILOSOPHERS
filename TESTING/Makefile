@@ -1,10 +1,9 @@
 NAME = philo
 SRC = SRCS/main.c \
-	  SRCS/param_handler.c \
       SRCS/utils.c \
-	  SRCS/utils2.c \
-	  SRCS/utils3.c \
+	  SRCS/init.c \
 
+LIBFT = -L./LIBFT -lft
 PTHREAD = -pthread
 CC = gcc #clang
 INC = -I./thread.h
@@ -12,12 +11,14 @@ CFLAGS = #-Wall -Wextra -Werror #-g3 -fsanitize=address
 RM = rm -rf
 OBJ = $(SRC:.c=.o)
 $(NAME): $(OBJ)
-	@$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(INC) $(PTHREAD)
+	@$(MAKE) -C ./LIBFT
+	@$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(INC) $(LIBFT) $(PTHREAD)
 	@${RM} ${OBJ}
 all: $(NAME)
 clean:
 	@${RM} ${OBJ}
 fclean: clean
+	@$(MAKE) fclean -C ./LIBFT
 	@${RM} ${SAVE}
 	@${RM} ${NAME}
 re: fclean all
