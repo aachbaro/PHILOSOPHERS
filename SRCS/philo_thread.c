@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils2.c                                           :+:      :+:    :+:   */
+/*   philo_thread.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,44 +12,19 @@
 
 #include "../philo.h"
 
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
+void	philo(void *philo)
 {
-	size_t	i;
-
-	i = 0;
-	while (i < n && (s1[i] || s2[i]))
+	while (1)
 	{
-		if (s1[i] != s2[i])
-			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
-		i++;
+
 	}
-	return (0);
 }
 
-size_t	ft_strlen(const char *str)
+void	philo_sleep(t_philo *philo)
 {
-	size_t	i;
-
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
-
-void	free_all(t_data *data)
-{
-	free(data->forks);
-	free(data->philo);
-	free(data->narator.ate_n_time);
-}
-
-void	ft_usleep(int usec)
-{
-	struct timeval	time;
-	int		start;
-
-	gettimeofday(&time, NULL);
-	start = time.tv_usec;
-	while (time.tv_usec - start < usec)
-		gettimeofday(&time, NULL);
+	int	i;
+	
+	philo->is_sleeping = 1;
+	ft_usleep(philo->param.sleep_t);
+	philo->is_sleeping = 0;
 }
