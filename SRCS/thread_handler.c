@@ -1,42 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo_thread.c                                     :+:      :+:    :+:   */
+/*   thread_heandler.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/21 12:19:56 by aachbaro          #+#    #+#             */
-/*   Updated: 2021/11/09 18:04:37 by aachbaro         ###   ########.fr       */
+/*   Created: 2021/11/09 16:17:20 by aachbaro          #+#    #+#             */
+/*   Updated: 2021/11/09 17:51:40 by aachbaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
 
-void	*philo(void *philo)
+void	thread_handler(t_data *data)
 {
+	int	i;
 
-	while (1)
+	i = 0;
+	pthread_create(&data->narator.thread, NULL, &narator, data);
+	while (i < data->param.nb_philo)
 	{
-		philo_sleep((t_philo *)philo);
-		philo_think((t_philo *)philo);
+		pthread_create(&data->philo[i].thread, NULL, &philo, &data->philo[i]);
+		i++;
 	}
-	return (NULL);
-}
-
-void	philo_sleep(t_philo *philo)
-{
-	struct timeval time;
-
-	gettimeofday(&time, NULL);
-	printf("\nOK\n");
-	hist_addback(&philo->hist, 2, time.tv_usec);
-	usleep(philo->param.sleep_t);
-}
-
-void	philo_think(t_philo *philo)
-{
-	struct timeval time;
-
-	gettimeofday(&time, NULL);
-	hist_addback(&philo->hist, 3, time.tv_usec);
+	pthread_join(data->narator.thread, NULL);
 }

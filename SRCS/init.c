@@ -6,7 +6,7 @@
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 12:19:56 by aachbaro          #+#    #+#             */
-/*   Updated: 2021/11/09 14:04:22 by aachbaro         ###   ########.fr       */
+/*   Updated: 2021/11/09 16:40:05 by aachbaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ int	init_philo(t_data *data)
 	while (i < data->param.nb_philo)
 	{
 		data->philo[i].number = i;
-		data->philo.ate = 0;
-		data->philo.hist = NULL;
+		data->philo[i].meal = 0;
+		data->philo[i].hist = NULL;
 		data->philo[i].param = data->param;
 		i++;
 	}
@@ -64,16 +64,7 @@ void	link_forks_to_philo(t_data *data)
 
 int	init_narator(t_data *data)
 {
-	int	i;
-
-	i = 0;
-	data->narator.old_phi = data->philo;
 	data->narator.start = data->start;
-	data->narator.ate_n_time = malloc(sizeof(int) * data->param.nb_philo);
-	if (!data->narator.ate_n_time)
-		return (-1);
-	while (i < data->param.nb_philo)
-		data->narator.ate_n_time[i++] = 0;
 	return (0);
 }
 

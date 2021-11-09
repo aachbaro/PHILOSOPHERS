@@ -4,7 +4,11 @@ SRC = SRCS/main.c \
       SRCS/utils.c \
       SRCS/utils2.c \
       SRCS/utils3.c \
+      SRCS/utils4.c \
       SRCS/init.c \
+	  SRCS/narator_thread.c \
+	  SRCS/philo_thread.c \
+	  SRCS/thread_handler.c \
 
 PTHREAD = -pthread
 CC = gcc #clang

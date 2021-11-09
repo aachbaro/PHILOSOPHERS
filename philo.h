@@ -12,7 +12,7 @@ typedef struct	s_list
 	int		type;
 	int		time;
 	struct s_list	*next;
-}
+}				t_list;
 
 typedef	struct	s_param
 {
@@ -25,20 +25,20 @@ typedef	struct	s_param
 
 typedef struct		s_philo
 {
-	int		number;
-	int		ate;
-	pthread_t	thread;
-	pthread_mutex_t	*left_f;
-	pthread_mutex_t	*right_f;
-	t_param		param;
-	t_list		*hist;
+	int					number;
+	int					meal;
+	int					last_meal;
+	pthread_t			thread;
+	pthread_mutex_t		*left_f;
+	pthread_mutex_t		*right_f;
+	t_param				param;
+	t_list				*hist;
 }			t_philo;
 
 typedef struct	s_narator
 {
 	pthread_t	thread;
-	t_philo		*old_phi;
-	int		start;
+	int			start;
 }		t_narator;
 
 typedef struct	s_data
@@ -66,5 +66,14 @@ int	init_narator(t_data *data);
 int	init_all(t_data *data);
 void	free_all(t_data *data);
 void	ft_usleep(int usec);
+void	hist_addback(t_list **start, int type, int time);
+void	ft_putnbr(int nb);
+void	ft_putstr(char *s);
+void	hist_write(t_list **start, t_narator nar, int philo);
+void	*philo(void *philo);
+void	philo_sleep(t_philo *philo);
+void	philo_think(t_philo *philo);
+void	*narator(void *data);
+void	thread_handler(t_data *data);
 
 #endif
