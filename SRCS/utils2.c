@@ -6,7 +6,7 @@
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 12:19:56 by aachbaro          #+#    #+#             */
-/*   Updated: 2021/10/21 12:30:20 by aachbaro         ###   ########.fr       */
+/*   Updated: 2021/11/09 13:53:24 by aachbaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ void	free_all(t_data *data)
 {
 	free(data->forks);
 	free(data->philo);
-	free(data->narator.ate_n_time);
 }
 
 void	ft_usleep(int usec)

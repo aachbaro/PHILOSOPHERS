@@ -7,6 +7,13 @@
 # include <unistd.h>
 # include <sys/time.h>
 
+typedef struct	s_list
+{
+	int		type;
+	int		time;
+	struct s_list	*next;
+}
+
 typedef	struct	s_param
 {
 	int			nb_philo;
@@ -19,13 +26,12 @@ typedef	struct	s_param
 typedef struct		s_philo
 {
 	int		number;
+	int		ate;
 	pthread_t	thread;
-	int		is_sleeping;
-	int		is_eating;
-	int		is_thinking;
 	pthread_mutex_t	*left_f;
 	pthread_mutex_t	*right_f;
 	t_param		param;
+	t_list		*hist;
 }			t_philo;
 
 typedef struct	s_narator
@@ -33,7 +39,6 @@ typedef struct	s_narator
 	pthread_t	thread;
 	t_philo		*old_phi;
 	int		start;
-	int		*ate_n_time;
 }		t_narator;
 
 typedef struct	s_data

@@ -6,7 +6,7 @@
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 12:19:56 by aachbaro          #+#    #+#             */
-/*   Updated: 2021/10/21 12:30:20 by aachbaro         ###   ########.fr       */
+/*   Updated: 2021/11/09 14:04:22 by aachbaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,8 @@ int	init_philo(t_data *data)
 	while (i < data->param.nb_philo)
 	{
 		data->philo[i].number = i;
-		data->philo[i].is_sleeping = 0;
-		data->philo[i].is_eating = 0;
-		data->philo[i].is_thinking = 0;
+		data->philo.ate = 0;
+		data->philo.hist = NULL;
 		data->philo[i].param = data->param;
 		i++;
 	}
