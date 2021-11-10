@@ -6,7 +6,7 @@
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 13:55:11 by aachbaro          #+#    #+#             */
-/*   Updated: 2021/11/10 13:23:11 by aachbaro         ###   ########.fr       */
+/*   Updated: 2021/11/10 14:58:52 by aachbaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,6 @@ void	hist_addback(t_list **start, int type, int time)
 		ptr = hist_last(*start);
 		ptr->next = new;
 	}
-}
-
-void	ft_putchar(char c)
-{
-	write(1, &c, 1);
 }
 
 void	ft_putnbr(int nb)

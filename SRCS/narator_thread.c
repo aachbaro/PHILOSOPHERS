@@ -6,11 +6,16 @@
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 15:47:38 by aachbaro          #+#    #+#             */
-/*   Updated: 2021/11/10 13:38:13 by aachbaro         ###   ########.fr       */
+/*   Updated: 2021/11/10 15:00:29 by aachbaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
+
+void	ft_putchar(char c)
+{
+	write(1, &c, 1);
+}
 
 void	*aff_death(int philo, int time)
 {
@@ -22,22 +27,38 @@ void	*aff_death(int philo, int time)
 	return (NULL);
 }
 
+int	check_end(t_data *data, int i)
+{
+	if (get_time() - data->philo[i].last_meal >= data->param.die_t)
+	{
+		aff_death(i, get_time() - data->start);
+		return (-1);
+	}
+	if (data->philo[i].meal >= data->philo[i].param.simul_end)
+		data->narator.philo_full++;
+	if (data->narator.philo_full == data->param.nb_philo
+		&& data->param.simul_end != -1)
+		return (-1);
+	return (0);
+}
+
 void	*narator(void *data)
 {
-	int				i;
-	t_data			*cpy;
+	int		i;
+	t_data	*cpy;
 
 	cpy = (t_data *)data;
 	while (1)
 	{
 		i = 0;
+		cpy->narator.philo_full = 0;
 		while (i < cpy->param.nb_philo)
 		{
-			if (get_time() - cpy->philo[i].last_meal > cpy->param.die_t)
-				return (aff_death(i, get_time() - cpy->start));
 			pthread_mutex_lock(&cpy->philo[i].mut_hist);
 			hist_write(&cpy->philo[i].hist, cpy->narator, i);
 			pthread_mutex_unlock(&cpy->philo[i].mut_hist);
+			if (check_end(cpy, i) == -1)
+				return (NULL);
 			i++;
 		}
 	}

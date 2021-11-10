@@ -18,7 +18,6 @@ RM = rm -rf
 OBJ = $(SRC:.c=.o)
 $(NAME): $(OBJ)
 	@$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(INC) $(PTHREAD)
-	@${RM} ${OBJ}
 all: $(NAME)
 clean:
 	@${RM} ${OBJ}

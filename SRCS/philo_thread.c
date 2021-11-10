@@ -6,7 +6,7 @@
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 12:19:56 by aachbaro          #+#    #+#             */
-/*   Updated: 2021/11/10 13:44:30 by aachbaro         ###   ########.fr       */
+/*   Updated: 2021/11/10 14:58:29 by aachbaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,15 @@ void	philo_think(t_philo *philo)
 
 void	philo_eat(t_philo *philo)
 {
-	pthread_mutex_lock(philo->right_f);	
+	pthread_mutex_lock(philo->right_f);
+	pthread_mutex_lock(&philo->mut_hist);
 	hist_addback(&philo->hist, 0, get_time());
+	pthread_mutex_unlock(&philo->mut_hist);
 	pthread_mutex_lock(philo->left_f);
+	pthread_mutex_lock(&philo->mut_hist);
 	hist_addback(&philo->hist, 0, get_time());
 	hist_addback(&philo->hist, 1, get_time());
+	pthread_mutex_unlock(&philo->mut_hist);
 	philo->last_meal = get_time();
 	philo->meal++;
 	ft_usleep(philo->param.eat_t);

@@ -6,13 +6,13 @@
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 12:13:14 by aachbaro          #+#    #+#             */
-/*   Updated: 2021/10/21 13:52:27 by aachbaro         ###   ########.fr       */
+/*   Updated: 2021/11/10 14:57:24 by aachbaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
 
-int		param_handler(t_param *param, int ac, char **av)
+int	param_handler(t_param *param, int ac, char **av)
 {	
 	if (ac < 5 || ac > 6)
 		return (-1);
@@ -29,7 +29,7 @@ int		param_handler(t_param *param, int ac, char **av)
 	return (0);
 }
 
-int		check_digit(char *str)
+int	check_digit(char *str)
 {
 	char	*tmp;
 	char	**tab;
@@ -56,7 +56,7 @@ int		check_digit(char *str)
 	return (0);
 }
 
-int		check_param(int ac, char **av)
+int	check_param(int ac, char **av)
 {
 	int		i;
 	int		j;
