@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philo.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/11/10 11:18:41 by aachbaro          #+#    #+#             */
+/*   Updated: 2021/11/10 13:43:21 by aachbaro         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef	THREAD_H
 # define THREAD_H
 # include <pthread.h>
@@ -33,6 +45,7 @@ typedef struct		s_philo
 	pthread_mutex_t		*right_f;
 	t_param				param;
 	t_list				*hist;
+	pthread_mutex_t		mut_hist;
 }			t_philo;
 
 typedef struct	s_narator
@@ -65,14 +78,16 @@ void	link_forks_to_philo(t_data *data);
 int	init_narator(t_data *data);
 int	init_all(t_data *data);
 void	free_all(t_data *data);
-void	ft_usleep(int usec);
+long int	get_time(void);
+void	ft_usleep(long int usec);
 void	hist_addback(t_list **start, int type, int time);
 void	ft_putnbr(int nb);
 void	ft_putstr(char *s);
-void	hist_write(t_list **start, t_narator nar, int philo);
+void	hist_write(t_list **ptr, t_narator nar, int philo);
 void	*philo(void *philo);
 void	philo_sleep(t_philo *philo);
 void	philo_think(t_philo *philo);
+void	philo_eat(t_philo *philo);
 void	*narator(void *data);
 void	thread_handler(t_data *data);
 

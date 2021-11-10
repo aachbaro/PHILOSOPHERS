@@ -6,7 +6,7 @@
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 15:47:38 by aachbaro          #+#    #+#             */
-/*   Updated: 2021/11/09 17:52:30 by aachbaro         ###   ########.fr       */
+/*   Updated: 2021/11/10 13:38:13 by aachbaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,19 +25,19 @@ void	*aff_death(int philo, int time)
 void	*narator(void *data)
 {
 	int				i;
-	struct timeval	time;
 	t_data			*cpy;
 
 	cpy = (t_data *)data;
 	while (1)
 	{
 		i = 0;
-		gettimeofday(&time, NULL);
 		while (i < cpy->param.nb_philo)
 		{
-		//	if (time.tv_usec - cpy->philo[i].last_meal > cpy->param.die_t)
-		//		return (aff_death(i, time.tv_usec - cpy->start));
-		//	hist_write(&cpy->philo[i].hist, cpy->narator, i);
+			if (get_time() - cpy->philo[i].last_meal > cpy->param.die_t)
+				return (aff_death(i, get_time() - cpy->start));
+			pthread_mutex_lock(&cpy->philo[i].mut_hist);
+			hist_write(&cpy->philo[i].hist, cpy->narator, i);
+			pthread_mutex_unlock(&cpy->philo[i].mut_hist);
 			i++;
 		}
 	}

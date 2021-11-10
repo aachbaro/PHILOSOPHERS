@@ -6,7 +6,7 @@
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 12:19:56 by aachbaro          #+#    #+#             */
-/*   Updated: 2021/11/09 18:04:02 by aachbaro         ###   ########.fr       */
+/*   Updated: 2021/11/10 11:35:47 by aachbaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,21 +42,21 @@ void	free_all(t_data *data)
 	free(data->philo);
 }
 
-long	get_time(void)
+long int	get_time(void)
 {
 	struct timeval	time;
+	int				ret;
 
 	gettimeofday(&time, NULL);
-	return ((time.tv_usec));
+	ret = (time.tv_sec * 1000) + (time.tv_usec / 1000);
+	return (ret);
 }
 
-void	ft_usleep(int usec)
+void	ft_usleep(long int usec)
 {
-	struct timeval	time;
-	int		start;
+	long int	start;
 
-	gettimeofday(&time, NULL);
-	start = time.tv_usec;
-	while (get_time() < usec + start)
-		;
+	start = get_time();
+	while (get_time() - start < usec)
+		usleep(usec / 10);
 }

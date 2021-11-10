@@ -6,7 +6,7 @@
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 13:55:11 by aachbaro          #+#    #+#             */
-/*   Updated: 2021/11/09 17:40:33 by aachbaro         ###   ########.fr       */
+/*   Updated: 2021/11/10 13:23:11 by aachbaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,18 +26,25 @@ t_list	*hist_last(t_list *lst)
 void	hist_addback(t_list **start, int type, int time)
 {
 	t_list	*ptr;
-	t_list	new;
+	t_list	*new;
 
-	new.type = type;
-	new.time = time;
-	new.next = NULL;
+	new = malloc(sizeof(t_list));
+	new->type = type;
+	new->time = time;
+	new->next = NULL;
+	ptr = *start;
 	if (*start == NULL)
-		*start = &new;
+		*start = new;
 	else
 	{
 		ptr = hist_last(*start);
-		ptr->next = &new;
+		ptr->next = new;
 	}
+}
+
+void	ft_putchar(char c)
+{
+	write(1, &c, 1);
 }
 
 void	ft_putnbr(int nb)
@@ -45,8 +52,6 @@ void	ft_putnbr(int nb)
 	long	cpy;
 
 	cpy = nb;
-	if (!nb)
-		write(1, "0", 1);
 	if (cpy < 0)
 	{
 		write(1, "-", 1);
@@ -54,7 +59,7 @@ void	ft_putnbr(int nb)
 	}
 	if (cpy > 9)
 		ft_putnbr(cpy / 10);
-	write(1, (char *)(cpy % 10 + '0'), 1);
+	ft_putchar(cpy % 10 + '0');
 }
 
 void	ft_putstr(char *s)
@@ -67,25 +72,26 @@ void	ft_putstr(char *s)
 	write(1, s, i);
 }
 
-void	hist_write(t_list **start, t_narator nar, int philo)
+void	hist_write(t_list **ptr, t_narator nar, int philo)
 {
-	t_list *cpy;
+	t_list	*cpy;
 
-	cpy = *start;
-	while (cpy)
+	while (*ptr)
 	{
-		ft_putnbr(cpy->time - nar.start);
+		ft_putnbr((*ptr)->time - nar.start);
 		write(1, " ", 1);
 		ft_putnbr(philo);
 		write(1, " ", 1);
-		if (cpy->type == 0)
+		if ((*ptr)->type == 0)
 			ft_putstr("has taken a fork\n");
-		else if (cpy->type == 1)
+		else if ((*ptr)->type == 1)
 			ft_putstr("is eating\n");
-		else if (cpy->type == 2)
+		else if ((*ptr)->type == 2)
 			ft_putstr("is sleeping\n");
-		else if (cpy->type == 3)
+		else if ((*ptr)->type == 3)
 			ft_putstr("is thinking\n");
-		cpy = cpy->next;
+		cpy = (*ptr)->next;
+		free(*ptr);
+		*ptr = cpy;
 	}
 }
