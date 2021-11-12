@@ -13,7 +13,7 @@ SRC = SRCS/main.c \
 PTHREAD = -pthread
 CC = gcc #clang
 INC = -I./thread.h
-CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=thread
 RM = rm -rf
 OBJ = $(SRC:.c=.o)
 $(NAME): $(OBJ)
