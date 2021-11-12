@@ -6,7 +6,7 @@
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 12:19:56 by aachbaro          #+#    #+#             */
-/*   Updated: 2021/11/10 15:02:29 by aachbaro         ###   ########.fr       */
+/*   Updated: 2021/11/10 15:49:51 by aachbaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	init_philo(t_data *data)
 		data->philo[i].last_meal = get_time();
 		data->philo[i].hist = NULL;
 		pthread_mutex_init(&data->philo[i].mut_hist, NULL);
+		pthread_mutex_init(&data->philo[i].mut_meal_shit, NULL);
 		data->philo[i].param = data->param;
 		i++;
 	}

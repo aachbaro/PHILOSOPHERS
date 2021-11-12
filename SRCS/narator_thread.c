@@ -6,7 +6,7 @@
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 15:47:38 by aachbaro          #+#    #+#             */
-/*   Updated: 2021/11/10 15:00:29 by aachbaro         ###   ########.fr       */
+/*   Updated: 2021/11/10 15:54:11 by aachbaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	*aff_death(int philo, int time)
 
 int	check_end(t_data *data, int i)
 {
+	pthread_mutex_lock(&data->philo[i].mut_meal_shit);
 	if (get_time() - data->philo[i].last_meal >= data->param.die_t)
 	{
 		aff_death(i, get_time() - data->start);
@@ -36,6 +37,7 @@ int	check_end(t_data *data, int i)
 	}
 	if (data->philo[i].meal >= data->philo[i].param.simul_end)
 		data->narator.philo_full++;
+	pthread_mutex_unlock(&data->philo[i].mut_meal_shit);
 	if (data->narator.philo_full == data->param.nb_philo
 		&& data->param.simul_end != -1)
 		return (-1);

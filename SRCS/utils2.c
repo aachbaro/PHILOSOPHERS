@@ -6,7 +6,7 @@
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 12:19:56 by aachbaro          #+#    #+#             */
-/*   Updated: 2021/11/10 11:35:47 by aachbaro         ###   ########.fr       */
+/*   Updated: 2021/11/10 16:41:25 by aachbaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,23 @@ size_t	ft_strlen(const char *str)
 
 void	free_all(t_data *data)
 {
+	int		i;
+	t_list	*cpy;
+
+	i = 0;
+	while (i < data->param.nb_philo)
+	{
+		while (data->philo[i].hist)
+		{
+			cpy = data->philo[i].hist->next;
+			free(data->philo[i].hist);
+			data->philo[i].hist = cpy;
+		}
+		pthread_mutex_destroy(&data->philo[i].mut_hist);
+		pthread_mutex_destroy(&data->philo[i].mut_meal_shit);
+		pthread_mutex_destroy(&data->forks[i]);
+		i++;
+	}
 	free(data->forks);
 	free(data->philo);
 }

@@ -6,7 +6,7 @@
 /*   By: aachbaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 11:18:41 by aachbaro          #+#    #+#             */
-/*   Updated: 2021/11/10 15:08:32 by aachbaro         ###   ########.fr       */
+/*   Updated: 2021/11/10 15:39:54 by aachbaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef struct s_philo
 	t_param				param;
 	t_list				*hist;
 	pthread_mutex_t		mut_hist;
+	pthread_mutex_t		mut_meal_shit;
 }						t_philo;
 
 typedef struct s_narator
